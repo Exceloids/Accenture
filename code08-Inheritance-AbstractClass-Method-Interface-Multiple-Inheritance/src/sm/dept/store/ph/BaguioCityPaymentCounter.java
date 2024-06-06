@@ -28,10 +28,21 @@ public class BaguioCityPaymentCounter {
         
         if (bpiCC.isNumberEqualTo16(creditCardNumber)) {
             if (bpiCC.isCreditCardNumberValid(creditCardNumber)){
-                System.out.println("Thank you customer " + customerName);
+                System.out.println("Customer Name: " + customerName);
+                System.out.println("Gross Purchase Amount: Php ");
+                
+                double vatAmount= bpiCC.computeVAT(amountPurchased);
+                System.out.println("VAT\t\t: Php" + vatAmount);
+                System.out.println("Total Amount: Php" + (amountPurchased + vatAmount));
                 System.out.println("Credit card number" + creditCardNumber + "is valid");
-                System.out.println("thank you for paying the amount of" + amountPurchased);
+                System.out.println("Thank you for paying the amount of" + amountPurchased);
+            } else{
+                System.err.println("Invalid credit card number. Transaction aborted");
             }
+        } else{
+            System.out.println("Invalid credit card number length- must be 16 digits" + "Transavction aborted");
         }
+            System.out.println("\n Thank you for shopping in SM Baguio City");
+            System.out.println("Because we got it all for you");
     }
 }

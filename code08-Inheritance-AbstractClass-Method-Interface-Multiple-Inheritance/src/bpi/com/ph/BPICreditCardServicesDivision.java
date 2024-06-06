@@ -5,12 +5,15 @@
  */
 package bpi.com.ph;
 import bsp.gov.ph.model.CreditCardRegulation;
+import bir.gov.ph.model.BIRTaxPayment;
+import bir.gov.ph.model.BIRMessages;
 
 /**
  *
  * @author m303user
  */
-public class BPICreditCardServicesDivision extends CreditCardRegulation{
+public class BPICreditCardServicesDivision extends CreditCardRegulation
+    implements BIRTaxPayment, BIRMessages{
     
     public BPICreditCardServicesDivision() throws InterruptedException{
         System.out.println("Welcome to BPI Credit Card Services Division");
@@ -49,6 +52,16 @@ public class BPICreditCardServicesDivision extends CreditCardRegulation{
             }
         }
         return (s1 + s2) % 10 == 0;
+    }
+
+    @Override
+    public double computeVAT(double amountPurchased) {
+        return amountPurchased*VAT_AMOUNT;
+    }
+    
+    public void vatMessageToConsumer(){
+        System.out.println("\n"+ANNOUNCEMNT_ON_VAT);
+        System.out.println(REPUBLIC_ACT_9337);
     }
     
 }
